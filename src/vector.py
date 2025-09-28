@@ -3,17 +3,33 @@ from langchain_qdrant import QdrantVectorStore
 from qdrant_client import QdrantClient
 import os 
 from dotenv import load_dotenv 
+import streamlit as st
+load_dotenv()
+def get_fun(key_name):
+    try:
+        # Pehle Streamlit secrets check kare
+        if key_name in st.secrets:
+            return st.secrets[key_name]
+
+        # Warna .env se lo
+        return os.getenv(key_name)
+
+    except Exception as e:
+        print(f"Error retrieving {key_name}: {e}")
+        return None
+
+
 
 #func to get api key from .env file
-def get_fun(key_name):
+# def get_fun(key_name):
 
-    load_dotenv()
-    try:
-       key=os.getenv(key_name)
-       return key
-    except Exception as e:
-         print(f"Error retrieving {key_name}: {e}")
-         return None
+#     load_dotenv()
+#     try:
+#        key=os.getenv(key_name)
+#        return key
+#     except Exception as e:
+#          print(f"Error retrieving {key_name}: {e}")
+#          return None
     
 def vectorstore_fun(chunks): 
     model_name = "sentence-transformers/all-MiniLM-L6-v2"
@@ -39,3 +55,4 @@ def vectorstore_fun(chunks):
         api_key=Qdrant_api_key,
     )
     return vectorstore
+
