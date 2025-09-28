@@ -1,10 +1,9 @@
 streamlit
-python-dotenv
-qdrant-client
 langchain
 langchain-core
 langchain-community
 langchain-google-genai
 langchain-huggingface
-sentence-transformers
-pypdf
+langchain-qdrant
+qdrant-client
+python-dotenv
